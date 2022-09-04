@@ -14,7 +14,6 @@ getConnection();
 
 //parseo JSON
 app.use(express.json());
-
   app.use('/usuario', require('./router/usuario'));
   app.use('/estado-equipo', require('./router/estadoEquipo'));
   app.use('/marca', require('./router/marca'));
