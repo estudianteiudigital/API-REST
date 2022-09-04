@@ -39,29 +39,29 @@ router.post('/', async function (req, res){ //crear
 });
 
 router.put('/:marcaId', async function (req, res){   //actualizar
-    try {
+  try {
 
       const validaciones = validarMarca(req);
 
       if(validaciones.length > 0) {
           return res.status(400).send(validaciones); 
       }
-    
-        let marca = await Marca.findById(req.params.marcaId);
-        if(!marca) {
-            return res.status(400).send('Marca no existe');
-        }
-        marca.nombre = req.body.nombre; 
-        marca.estado = req.body.estado;
-        marca.fechaActualizacion = new Date();
-      
-        marca = await marca.save(); 
-         res.send(marca);    
-      
-        } catch(error) {
-          console.log(error);
-          res.status(500).send('Ocurrio un error');
-        }
+
+      let marca = await Marca.findById(req.params.marcaId);
+      if(!marca) {
+       return res.status(400).send(validaciones);
+      }
+
+      marca.nombre = req.body.nombre;
+      marca.estado = req.body.estado; 
+      marca.fechaActualizacion = new Date();
+      marca = await marca.save();
+      res.send(marca); 
+   
+       } catch(error) {
+           console.log(error);
+           res.status(500).send('Ocurrio un error');
+       }
 });
 
 router.delete('/:marcaId', async function (req, res) {
