@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose');
-const EstadoEquipo = require('./EstadoEquipo');
+  const EstadoEquipo = require('./EstadoEquipo');
 
-const InventarioSchema = Schema({  //atributos de la tabla 
+const InventarioSchema = Schema({  //atributos del modelo
     serial: {
         type: String,
         required: true,

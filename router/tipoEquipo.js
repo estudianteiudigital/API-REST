@@ -79,4 +79,17 @@ router.delete('/:tipoEquipoId', async function (req, res) {
     }
   });
 
+  router.get('/:tipoEquipoId', async function (req, res) {
+    try {
+      const tipoEquipo = await TipoEquipo.findById(req.params.tipoEquipoId);
+      if(!tipoEquipo) {
+        return res.status(404).send('Inventario no existe');
+      }
+      res.send(tipoEquipo);
+    } catch (error) {
+     console.log(error); 
+     res.status(500).send('Ocurrio un error al consultar tipoEquipo');
+    }
+    });
+
 module.exports = router;
