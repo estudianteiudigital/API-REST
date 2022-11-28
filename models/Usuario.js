@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 //creamos esquema 
 
-const   UsuarioSchema = Schema({   //propiedades qde la tabla Usuario
+const   UsuarioSchema = Schema({   //propiedades del modelo Usuario
 
     nombre:{
       type: String,
@@ -12,7 +12,6 @@ const   UsuarioSchema = Schema({   //propiedades qde la tabla Usuario
         type: String,
         required: true,
         unique: true,  //
-
     },
     estado:{
         type: String,
@@ -21,6 +20,18 @@ const   UsuarioSchema = Schema({   //propiedades qde la tabla Usuario
          'Activo',
          'Inactivo'
         ]
+    },
+    contrasena: {
+      type: String,
+      required: true,
+    },
+    rol: {
+      type: String,
+      required : true,
+      enum: [
+        'ADMIN',
+        'DOCENTE'
+     ]
     },
     fechaCreacion:{
      type: Date,

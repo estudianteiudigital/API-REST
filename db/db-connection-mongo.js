@@ -12,6 +12,7 @@
         console.log('Conexion exitosa');
     } catch(error) {
         console.log(error);
+        throw new Error('Error connect BD'); 
     }
 
 }
