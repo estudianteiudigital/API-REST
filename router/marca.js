@@ -1,10 +1,12 @@
 const { Router } = require('express');
 const Marca = require('../models/Marca');
 const { validarMarca } = require('../helpers/validar-marca');
+const { validarJWT } = require('../middlewares/validar-jwt');
+const { validarRolAdmin } = require('../middlewares/validar-rol-admin');
 
 const router = Router();
 
-router.get('/', async function (req, res) {
+router.get('/', [validarJWT], async function (req, res) {
 
     try {
         const marcas = await Marca.find(); 
@@ -15,7 +17,7 @@ router.get('/', async function (req, res) {
        }
 });
 
-router.post('/', async function (req, res){ //crear
+router.post('/', [validarJWT, validarRolAdmin], async function (req, res){ //crear
   try {
     const validaciones = validarMarca(req);
 
@@ -38,7 +40,7 @@ router.post('/', async function (req, res){ //crear
     }
 });
 
-router.put('/:marcaId', async function (req, res){   //actualizar
+router.put('/:marcaId', [validarJWT, validarRolAdmin], async function (req, res){   //actualizar
   try {
 
       const validaciones = validarMarca(req);
@@ -64,7 +66,7 @@ router.put('/:marcaId', async function (req, res){   //actualizar
        }
 });
 
-router.delete('/:marcaId', async function (req, res) {
+router.delete('/:marcaId',[validarJWT, validarRolAdmin],  async function (req, res) {
   try {
 
     console.log('Objeto recibido', req.body, req.params); // 
@@ -83,7 +85,7 @@ router.delete('/:marcaId', async function (req, res) {
   }
 });
 
-router.get('/:marcaId', async function (req, res) {
+router.get('/:marcaId', [validarJWT], async function (req, res) {
   try {
     const marca = await Marca.findById(req.params.marcaId);
     if(!marca) {

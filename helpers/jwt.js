@@ -6,7 +6,7 @@ const payload = {
     estado: usuario.estado, rol: usuario.rol
  };
 
- const token = jwt.sign( payload, '123',  { expiresIn: '12h' });
+ const token = jwt.sign( payload, '123',  { expiresIn: '1h' });
  return token;
 
 }

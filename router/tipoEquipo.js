@@ -1,11 +1,13 @@
 const { Router } = require('express');
 const TipoEquipo = require('../models/TipoEquipo'); 
 const { validarTipoEquipo } = require('../helpers/validar-tipoEquipo');
+const { validarJWT } = require('../middlewares/validar-jwt');
+const { validarRolAdmin } = require('../middlewares/validar-rol-admin');
 
 const router = Router();
 
 
-router.get('/', async function (req, res){ //listar 
+router.get('/', [ validarJWT ], async function (req, res){ //listar 
     try {
    const tipos = await TipoEquipo.find();
    res.send(tipos);
@@ -16,7 +18,7 @@ router.get('/', async function (req, res){ //listar
     }
 });
 
-router.post('/', async function (req, res){ //crear
+router.post('/', [validarJWT, validarRolAdmin], async function (req, res){ //crear
     try {
         const validaciones = validarTipoEquipo(req);
 
@@ -38,7 +40,7 @@ router.post('/', async function (req, res){ //crear
     }
 });
 
-router.put('/:tipoEquipoId', async function (req, res){   //actualizar
+router.put('/:tipoEquipoId', [validarJWT, validarRolAdmin], async function (req, res){   //actualizar
     try {
 
         const validaciones = validarTipoEquipo(req);
@@ -60,7 +62,7 @@ router.put('/:tipoEquipoId', async function (req, res){   //actualizar
          }
 });
 
-router.delete('/:tipoEquipoId', async function (req, res) {
+router.delete('/:tipoEquipoId', [validarJWT, validarRolAdmin], async function (req, res) {
     try {
   
       console.log('Objeto recibido', req.body, req.params); // 
@@ -79,7 +81,7 @@ router.delete('/:tipoEquipoId', async function (req, res) {
     }
   });
 
-  router.get('/:tipoEquipoId', async function (req, res) {
+  router.get('/:tipoEquipoId', [validarJWT], async function (req, res) {
     try {
       const tipoEquipo = await TipoEquipo.findById(req.params.tipoEquipoId);
       if(!tipoEquipo) {

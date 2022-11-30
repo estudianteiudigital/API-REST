@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 
 //creamos esquema 
-
 const   UsuarioSchema = Schema({   //propiedades del modelo Usuario
 
     nombre:{
