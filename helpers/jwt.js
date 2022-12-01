@@ -8,7 +8,6 @@ const payload = {
 
  const token = jwt.sign( payload, '123',  { expiresIn: '1h' });
  return token;
-
 }
 
 module.exports = {

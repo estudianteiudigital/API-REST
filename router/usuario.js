@@ -16,7 +16,7 @@ router.post('/', [
   check('contrasena', 'invalid.contrasena').not().isEmpty(),
   check('rol', 'invalid.rol').isIn(['ADMIN', 'DOCENTE']),
   validarJWT,
-  validarRolAdmin,
+  validarRolAdmin
 
 ], async function (req, res) {
   try {
@@ -61,7 +61,7 @@ if ( existeUsuario) {
     console.log(error);
     res.status(500).json({ mensaje: 'Ocurrio un error en el servidor' });
   }
-
+  
 });
 
 //Listar 

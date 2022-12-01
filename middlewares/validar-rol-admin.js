@@ -8,5 +8,5 @@ const validarRolAdmin = (req, res, next) => {
 }
 
 module.exports = {
-    validarRolAdmin
+    validarRolAdmin  
 }
