@@ -6,7 +6,7 @@ const { validarRolAdmin } = require('../middlewares/validar-rol-admin');
 
 const router = Router();
 
-router.get('/', [validarJWT], async function (req, res) {
+router.get('/', [validarJWT, validarRolAdmin], async function (req, res) {
 
     try {
         const marcas = await Marca.find(); 
@@ -85,7 +85,7 @@ router.delete('/:marcaId',[validarJWT, validarRolAdmin],  async function (req, r
   }
 });
 
-router.get('/:marcaId', [validarJWT], async function (req, res) {
+router.get('/:marcaId', [validarJWT, validarRolAdmin],async function (req, res) {
   try {
     const marca = await Marca.findById(req.params.marcaId);
     if(!marca) {

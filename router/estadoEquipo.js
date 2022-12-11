@@ -6,7 +6,7 @@ const {validarRolAdmin} = require('../middlewares/validar-rol-admin');
 
 const router = Router();
 
-router.get('/', [validarJWT], async function (req, res) {
+router.get('/', [validarJWT, validarRolAdmin], async function (req, res) {
   try {
     const tipos = await EstadoEquipo.find(); 
    res.send(tipos);
@@ -81,7 +81,7 @@ router.post('/', [validarJWT, validarRolAdmin], async function (req, res) {
     }
   });
 
-  router.get('/:estadoEquipoId', [validarJWT], async function (req, res) {
+  router.get('/:estadoEquipoId', [validarJWT, validarRolAdmin], async function (req, res) {
     try {
       const estadoEquipo = await EstadoEquipo.findById(req.params.estadoEquipoId);
       if(!estadoEquipo) {
