@@ -65,7 +65,7 @@ if ( existeUsuario) {
 });
 
 //Listar 
-router.get('/', [validarJWT], async function (req, res) {
+router.get('/', [validarJWT, validarRolAdmin], async function (req, res) {
   try {
     const usuarios = await Usuario.find();
     res.send(usuarios);
@@ -147,7 +147,7 @@ router.delete('/:usuarioId', [validarJWT, validarRolAdmin], async function (req,
   }
 });
 
-router.get('/:usuarioId', [validarJWT], async function (req, res) {
+router.get('/:usuarioId', [validarJWT, validarRolAdmin], async function (req, res) {
   try {
     const usuario = await Usuario.findById(req.params.usuarioId);
     if (!usuario) {
